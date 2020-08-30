@@ -35,7 +35,7 @@ namespace MRTKExtensions.ServiceExtensions.Editor
         }
 
         /// <summary>
-        /// Draw the inspector UI for the current serivce
+        /// Draw the inspector UI for the current service
         /// </summary>
         /// <param name="target"></param>
         public override void DrawInspectorGUI(object target)
