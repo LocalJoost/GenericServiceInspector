@@ -15,11 +15,6 @@ namespace MRTKExtensions.ServiceExtensions.Editor
     public class BaseGenericServiceInspector : BaseMixedRealityServiceInspector
     {
         /// <summary>
-        /// Preference keys showing open/close of foldout
-        /// </summary>
-        private readonly Dictionary<string, bool> preferenceKeys = new Dictionary<string, bool>();
-
-        /// <summary>
         /// Used as postfix for keys
         /// </summary>
         private int keyCounter = 0;
@@ -43,21 +38,6 @@ namespace MRTKExtensions.ServiceExtensions.Editor
             keyCounter = 0;
             GUI.enabled = false;
             RenderObjectFields(target);
-        }
-
-        /// <summary>
-        /// Get a preference key value - and create if not present
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        private bool GetPreferenceKeyValue(string id)
-        {
-            if (!preferenceKeys.ContainsKey(id))
-            {
-                preferenceKeys.Add(id, false);
-            }
-
-            return preferenceKeys[id];
         }
 
         /// <summary>
@@ -145,9 +125,9 @@ namespace MRTKExtensions.ServiceExtensions.Editor
             return false;
         }
 
-
         /// <summary>
-        /// Render Bold/HelpBox style Foldout. Graciously borrowed and adapted from BaseMixedRealityProfileInspector 
+        /// Render Bold/HelpBox style Foldout. Graciously borrowed adapted from BaseMixedRealityProfileInspector - and very much
+        /// simplified
         /// </summary>
         /// <param name="title">Title in foldout</param>
         /// <param name="renderContent">code to execute to render inside of foldout</param>
@@ -157,17 +137,10 @@ namespace MRTKExtensions.ServiceExtensions.Editor
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
 
             var preferenceKey = $"{preferenceKeyPrefix}_{preferenceKeyPostFix}";
-            var isValidPreferenceKey = !string.IsNullOrEmpty(preferenceKey);
-            var state = GetPreferenceKeyValue(preferenceKey);
-            if (isValidPreferenceKey)
-            {
-                state = SessionState.GetBool(preferenceKey, false);
-                preferenceKeys[preferenceKey] = EditorGUILayout.Foldout(state, title, true, MixedRealityStylesUtility.BoldFoldoutStyle);
-            }
+            var storedState = SessionState.GetBool(preferenceKey, false);
+            var currentState = EditorGUILayout.Foldout(storedState, title, true, MixedRealityStylesUtility.BoldFoldoutStyle);
 
-            var currentState = GetPreferenceKeyValue(preferenceKey);
-
-            if (isValidPreferenceKey && currentState != state)
+            if (currentState != storedState)
             {
                 SessionState.SetBool(preferenceKey, currentState);
             }
