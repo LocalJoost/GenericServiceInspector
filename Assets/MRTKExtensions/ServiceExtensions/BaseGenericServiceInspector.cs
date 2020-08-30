@@ -132,7 +132,7 @@ namespace MRTKExtensions.ServiceExtensions.Editor
         /// <param name="title">Title in foldout</param>
         /// <param name="renderContent">code to execute to render inside of foldout</param>
         /// <param name="preferenceKeyPostFix">current show/hide state will be tracked associated with provided preference key</param>
-        protected void RenderFoldout(string title, Action renderContent, string preferenceKeyPostFix)
+        private void RenderFoldout(string title, Action renderContent, string preferenceKeyPostFix)
         {
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
 
