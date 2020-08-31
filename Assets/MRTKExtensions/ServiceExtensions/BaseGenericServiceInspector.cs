@@ -44,7 +44,7 @@ namespace MRTKExtensions.ServiceExtensions.Editor
         /// Render all properties as editor fields, create foldout is complex object
         /// </summary>
         /// <param name="target"></param>
-        private void RenderObjectFields(object target)
+        protected void RenderObjectFields(object target)
         {
             if (target == null)
             {
