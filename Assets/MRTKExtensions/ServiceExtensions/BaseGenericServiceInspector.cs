@@ -46,6 +46,10 @@ namespace MRTKExtensions.ServiceExtensions.Editor
         /// <param name="target"></param>
         private void RenderObjectFields(object target)
         {
+            if (target == null)
+            {
+                return;
+            }
             foreach (var prop in target.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
                 // Render everything except the profile that's been taken care of already
