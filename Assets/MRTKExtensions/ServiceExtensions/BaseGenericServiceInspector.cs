@@ -1,6 +1,5 @@
 #if UNITY_EDITOR
 using System;
-using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.MixedReality.Toolkit;
 using Microsoft.MixedReality.Toolkit.Editor;
@@ -45,7 +44,7 @@ namespace MRTKExtensions.ServiceExtensions.Editor
         /// Render all properties as editor fields, create foldout is complex object
         /// </summary>
         /// <param name="target"></param>
-        protected void RenderObjectFields(object target)
+        private void RenderObjectFields(object target)
         {
             if (target == null)
             {
@@ -86,7 +85,7 @@ namespace MRTKExtensions.ServiceExtensions.Editor
         /// </summary>
         /// <param name="name">property name</param>
         /// <param name="propVal">property value</param>
-        private void DrawField(string name, object propVal)
+        protected void DrawField(string name, object propVal)
         {
             // Check if there's a custom field drawer first
             if (DrawCustomField(name, propVal))
@@ -125,7 +124,7 @@ namespace MRTKExtensions.ServiceExtensions.Editor
         /// <param name="name"></param>
         /// <param name="propVal"></param>
         /// <returns></returns>
-        public virtual bool DrawCustomField(string name, object propVal)
+        protected virtual bool DrawCustomField(string name, object propVal)
         {
             return false;
         }
