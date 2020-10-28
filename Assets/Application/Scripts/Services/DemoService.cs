@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Microsoft.MixedReality.Toolkit.Utilities;
 using Microsoft.MixedReality.Toolkit;
 using UnityEngine;
@@ -28,18 +29,14 @@ namespace DemoApp.Services
 
 		public ToStringOverriddenObject ToStringObject { get; } = new ToStringOverriddenObject();
 
-		public override void Initialize()
-		{
-			base.Initialize();
+        public List<ChildObject> ListOfObjects { get; } = new List<ChildObject>
+        {
+            new ChildObject{Property1 = "Object1"},
+            new ChildObject{Property1 = "Object2"},
+            new ChildObject{Property1 = "Object3"},
+            new ChildObject{Property1 = "Object4"},
+            new ChildObject{Property1 = "Object5"},
+        };
 
-			// Do service initialization here.
-		}
-
-		public override void Update()
-		{
-			base.Update();
-
-			// Do service updates here.
-		}
-	}
+    }
 }
